@@ -60,7 +60,8 @@ func (ctrl IndexController) Action() gin.HandlerFunc {
 }
 
 func (ctrl IndexController) index(c *gin.Context) {
-	app.Response(c).SendHtml("vuecmf/index/index.html", gin.H{
+	// 使用更安全的HTML响应方式
+	c.HTML(200, "vuecmf/index/index.html", gin.H{
 		"welcome": "Welcome to VueCMF V3",
 	})
 }

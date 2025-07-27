@@ -53,24 +53,63 @@ const router = createRouter({
 /**
  * 进入路由前
  */
-router.beforeEach( (to,from, next) => {
+router.beforeEach( async (to,from, next) => {
   const token = localStorage.getItem('vuecmf_token')
   const store = useStore()
+  
   if(to.name == 'login'){
+    // 如果已经登录，访问登录页面时重定向到首页
+    if(token && token !== '' && token !== null){
+      next({name:'welcome'});
+      return;
+    }
     next()
-  }else{
-    if(token == '' || token == null){
-      ElMessage.error('还没有登录或登录超时,请先登录！')
+    return;
+  }
+  
+  // 检查是否有token
+  if(token == '' || token == null){
+    ElMessage.error('还没有登录或登录超时,请先登录！')
+    next({name:'login'});
+    return;
+  }
+  
+  // 验证token有效性 - 使用admin列表API来验证token
+  try {
+    const response = await fetch(`${import.meta.env.VITE_APP_BASE_API}/vuecmf/admin/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'token': token
+      },
+      body: `action=index`
+    });
+    
+    const result = await response.json();
+    
+    if(result.code !== 0){
+      // token无效，清除本地存储并跳转到登录页
+      localStorage.clear();
+      ElMessage.error('登录已过期，请重新登录！')
       next({name:'login'});
-    }else if(to.name !== 'welcome' && store.nav_menu_list.length == 0){
+      return;
+    }
+    
+    // token有效，继续处理路由
+    if(to.name !== 'welcome' && store.nav_menu_list.length == 0){
       service.loadMenu().then((res:string|void)=> {
         res === 'router loaded' ? next({ path: to.path, query: to.query }) : next()
       })
     }else{
       next()
     }
+    
+  } catch (error) {
+    // 网络错误或其他错误，清除本地存储并跳转到登录页
+    localStorage.clear();
+    ElMessage.error('网络错误，请重新登录！')
+    next({name:'login'});
   }
-
 })
 
 
