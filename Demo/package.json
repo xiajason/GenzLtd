@@ -1,0 +1,52 @@
+{
+  "name": "vuecmf-web",
+  "version": "3.0.1",
+  "private": true,
+  "description": "VueCMF是一款完全开源免费的内容管理快速开发框架。前端使用vue3、Element Plus和TypeScript构建，后端API基于Go/PHP开发。可用于快速开发CMS、CRM、WMS、OMS、ERP等管理系统，开发简单、高效易用，极大减少系统的开发周期和研发成本！甚至不用写一行代码使用VueCMF就能设计出功能强大的后台管理系统。",
+  "author": "vuecmf.com <tulihua2004@126.com>",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "run-p type-check \"build-only {@}\" --",
+    "preview": "vite preview",
+    "build-only": "vite build",
+    "type-check": "vue-tsc --build --force"
+  },
+  "dependencies": {
+    "@element-plus/icons-vue": "^2.3.1",
+    "@types/qs": "^6.9.14",
+    "axios": "^1.7.9",
+    "core-js": "^3.36.1",
+    "element-plus": "^2.6.1",
+    "pinia": "^2.1.7",
+    "qs": "^6.12.0",
+    "sass": "^1.72.0",
+    "unplugin-auto-import": "^0.17.5",
+    "unplugin-vue-components": "^0.26.0",
+    "vue": "^3.4.21",
+    "vue-router": "^4.3.0",
+    "vue-vuecmf-dialog": "^2.0.3",
+    "vue-vuecmf-editor": "^2.0.3",
+    "vue3-vuecmf-table": "^2.0.4"
+  },
+  "devDependencies": {
+    "@tsconfig/node20": "^20.1.2",
+    "@types/node": "^20.11.30",
+    "@vitejs/plugin-vue": "^5.0.4",
+    "@vue/tsconfig": "^0.5.1",
+    "npm-run-all2": "^6.1.2",
+    "typescript": "~5.4.0",
+    "vite": "^5.4.6",
+    "vue-tsc": "^2.0.6"
+  },
+  "bugs": {
+    "url": "https://github.com/vuecmf/vuecmf/issues"
+  },
+  "homepage": "http://www.vuecmf.com",
+  "keyword": "vuecmf vue3 vuecmf开发框架",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vuecmf/vuecmf.git"
+  }
+}

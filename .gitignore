@@ -1,0 +1,67 @@
+# Dependencies
+node_modules/
+vendor/
+
+# Build outputs
+dist/
+build/
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+
+# Temporary folders
+tmp/
+temp/
+
+# Go specific
+*.test
+*.out
+
+# Database
+*.db
+*.sqlite
+
+# Config files with sensitive data
+config/database.yaml
+config/app.yaml
+
+# Docker
+.dockerignore
+
+# Cache
+.cache/
+.parcel-cache/ 
