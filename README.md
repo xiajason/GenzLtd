@@ -1,6 +1,6 @@
-# VueCMF 内容管理快速开发框架
+# GenzLtd 内容管理快速开发框架
 
-VueCMF是一款完全开源免费的内容管理快速开发框架。采用前后端分离模式搭建，v3版本前端使用vue3、Element Plus和TypeScript构建，后端API基于Go开发。可用于快速开发CMS、CRM、WMS、OMS、ERP等管理系统，开发简单、高效易用，极大减少系统的开发周期和研发成本！
+GenzLtd是一款完全开源免费的内容管理快速开发框架。采用前后端分离模式搭建，v3版本前端使用vue3、Element Plus和TypeScript构建，后端API基于Go开发。可用于快速开发CMS、CRM、WMS、OMS、ERP等管理系统，开发简单、高效易用，极大减少系统的开发周期和研发成本！
 
 ## 项目结构
 
@@ -219,7 +219,7 @@ go build -o vuecmf-server
 MIT License
 
 ## 相关链接
-
+感谢在前辈的帮助下，构建了GenzLtd的基础，我们将不断完善功能，给新生代提供更为高效便捷的个人发布平台系统。
 - [官方网站](http://www.vuecmf.com)
 - [使用文档](http://www.vuecmf.com)
 - [GitHub仓库](https://github.com/vuecmf/vuecmf)
@@ -231,4 +231,4 @@ MIT License
 - 解决了文件权限问题
 - 修复了路由重复注册问题
 - 优化了项目启动流程
-- 完善了调试文档 
+- 完善了调试文档 # GenzLtd
