@@ -64,4 +64,5 @@ config/app.yaml
 
 # Cache
 .cache/
-.parcel-cache/ 
+.parcel-cache/ node_modules/
+dist/
