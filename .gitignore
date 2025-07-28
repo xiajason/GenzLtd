@@ -66,3 +66,4 @@ config/app.yaml
 .cache/
 .parcel-cache/ node_modules/
 dist/
+pkg/
