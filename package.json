@@ -1,0 +1,56 @@
+{
+  "name": "vuecmf-project",
+  "version": "1.0.0",
+  "description": "VueCMF 现代化前后端分离开发框架",
+  "main": "index.js",
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0",
+    "yarn": ">=1.22.0"
+  },
+  "scripts": {
+    "check-env": "./check-env.sh",
+    "start-dev": "./start-dev.sh",
+    "start-docker": "./start-docker.sh",
+    "test": "./simple_test.sh",
+    "build": "npm run build:frontend && npm run build:backend",
+    "build:frontend": "cd vuecmf-web/frontend && npm run build",
+    "build:backend": "cd vuecmf-go && go build -o main .",
+    "install:all": "npm run install:frontend && npm run install:backend",
+    "install:frontend": "cd vuecmf-web/frontend && npm install",
+    "install:backend": "cd vuecmf-go && go mod tidy",
+    "clean": "npm run clean:frontend && npm run clean:backend",
+    "clean:frontend": "cd vuecmf-web/frontend && rm -rf node_modules dist",
+    "clean:backend": "cd vuecmf-go && rm -f main",
+    "docker:build": "docker-compose build",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:logs": "docker-compose logs -f",
+    "setup": "npm run check-env && npm run install:all"
+  },
+  "keywords": [
+    "vuecmf",
+    "vue3",
+    "go",
+    "docker",
+    "fullstack",
+    "cms"
+  ],
+  "author": "VueCMF Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vuecmf/vuecmf.git"
+  },
+  "bugs": {
+    "url": "https://github.com/vuecmf/vuecmf/issues"
+  },
+  "homepage": "https://github.com/vuecmf/vuecmf#readme",
+  "devDependencies": {
+    "cross-env": "^7.0.3"
+  },
+  "dependencies": {},
+  "config": {
+    "unsafe-perm": true
+  }
+} 

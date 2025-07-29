@@ -1,18 +1,57 @@
 version: '3.8'
 
 services:
-  web:
-    build:
-      context: .
+  # 前端构建服务
+  frontend-builder:
+    build: 
+      context: ./vuecmf-web/frontend
+      dockerfile: Dockerfile
+    ports:
+      - "8081:80"
+    environment:
+      - NODE_ENV=production
+    # 不依赖后端，独立运行
+    networks:
+      - vuecmf-network
+
+  # 后端管理系统服务
+  backend-manager:
+    build: 
+      context: ./vuecmf-go
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
-    container_name: Demo
-    volumes:
-      - /home/tulihua/myserver/config:/app/config
-      - /home/tulihua/myserver/static:/app/static
-      - /home/tulihua/myserver/uploads:/app/uploads
-      - /home/tulihua/myserver/views:/app/views
-    command: ["/app/main"]
-    restart: unless-stopped
+    environment:
+      - GIN_MODE=release
+      # 连接到本地数据库
+      - DB_HOST=host.docker.internal
+      - DB_PORT=3306
+      - DB_USER=root
+      - DB_PASSWORD=ServBay.dev
+      - DB_NAME=genzltd
+    # 使用host.docker.internal访问宿主机
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - vuecmf-network
 
+  # 可选：数据库管理工具（如phpMyAdmin）
+  db-admin:
+    image: phpmyadmin/phpmyadmin:latest
+    ports:
+      - "8082:80"
+    environment:
+      - PMA_HOST=host.docker.internal
+      - PMA_PORT=3306
+      - PMA_USER=root
+      - PMA_PASSWORD=ServBay.dev
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - vuecmf-network
+    profiles:
+      - db-admin  # 可选启动
+
+networks:
+  vuecmf-network:
+    driver: bridge
