@@ -36,7 +36,7 @@ check_go() {
         echo -e "${GREEN}✅ Go 已安装: $GO_VERSION${NC}"
         
         # 检查版本是否满足要求
-        REQUIRED_GO="1.20"
+        REQUIRED_GO="1.24.5"
         if [[ "$(printf '%s\n' "$REQUIRED_GO" "$GO_VERSION" | sort -V | head -n1)" == "$REQUIRED_GO" ]]; then
             echo -e "${GREEN}✅ Go 版本满足要求${NC}"
         else
@@ -129,7 +129,7 @@ check_mysql() {
 # 检测端口占用
 check_ports() {
     echo -e "${BLUE}🔍 检测端口占用...${NC}"
-    PORTS=("8080" "8081" "8082" "3306")
+    PORTS=('8080' '8081' '8080' '3306')
     
     for port in "${PORTS[@]}"; do
         if lsof -i :$port &> /dev/null; then
@@ -158,7 +158,7 @@ DB_NAME=genzltd
 # 服务配置
 BACKEND_PORT=8080
 FRONTEND_PORT=8081
-DB_ADMIN_PORT=8082
+DB_ADMIN_PORT=8080
 
 # 开发环境配置
 GIN_MODE=debug
@@ -250,4 +250,4 @@ main() {
 }
 
 # 运行主函数
-main 
+main

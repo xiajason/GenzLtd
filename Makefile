@@ -1,8 +1,17 @@
-.PHONY: help install-deps start-backend start-frontend start-dev build-docker clean
+.PHONY: help setup install-deps start-backend start-frontend start-dev build-docker clean
 
 help: ## 显示帮助信息
 	@echo "可用的命令:"
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
+
+setup: ## 完整项目设置
+	@echo "🔧 运行环境检查..."
+	./check-env.sh
+	@echo "⚙️ 生成配置文件..."
+	./config-generator.sh
+	@echo "📦 安装依赖..."
+	@make install-deps
+	@echo "✅ 项目设置完成！"
 
 install-deps: ## 安装所有依赖
 	@echo "📦 安装后端依赖..."

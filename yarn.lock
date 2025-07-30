@@ -6939,7 +6939,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vue-router@npm:4":
+"vue-router@npm:^4.2.0":
   version: 4.5.1
   resolution: "vue-router@npm:4.5.1"
   dependencies:
@@ -6996,7 +6996,7 @@ __metadata:
     eslint: "npm:^8.0.0"
     eslint-plugin-vue: "npm:^9.0.0"
     vue: "npm:^3.3.0"
-    vue-router: "npm:4"
+    vue-router: "npm:^4.2.0"
     vuex: "npm:^4.1.0"
   languageName: unknown
   linkType: soft

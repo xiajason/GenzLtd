@@ -75,7 +75,7 @@ make setup
 
 ### 4. 环境要求
 
-- **Go** >= 1.20
+- **Go** >= 1.24.5
 - **Node.js** >= 16.0
 - **Docker** >= 20.0 (可选，用于容器化部署)
 - **Docker Compose** >= 2.0 (可选)
@@ -117,7 +117,6 @@ make start-db-admin
 
 - **前端界面**: http://localhost:8081
 - **后端 API**: http://localhost:8080
-- **API 测试**: http://localhost:8080/api/hello
 - **健康检查**: http://localhost:8080/api/health
 
 ## 📋 可用命令
@@ -182,11 +181,11 @@ make test
 
 ```bash
 # 测试健康检查
-curl http://localhost:8080/api/health
+curl http://localhost:8080/vuecmf/health
 # 返回: {"message":"Backend service is running","status":"healthy"}
 
 # 测试 Hello API
-curl http://localhost:8080/api/hello
+curl http://localhost:8080/vuecmf/hello
 # 返回: {"message":"Hello from Go backend!","status":"success"}
 ```
 
@@ -201,7 +200,7 @@ curl http://localhost:8080/api/hello
 
 ### 后端技术
 
-- **语言**: Go 1.20
+- **语言**: Go 1.24.5
 - **框架**: 标准库 net/http
 - **容器**: Alpine Linux
 - **特性**: CORS 支持、JSON API、健康检查

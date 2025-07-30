@@ -58,7 +58,8 @@ get_package_manager() {
 generate_go_config() {
     echo -e "${BLUE}🔧 生成 Go 配置...${NC}"
     
-    GO_VERSION=$(get_go_version)
+    # 使用项目要求的固定Go版本
+    GO_VERSION="1.24.5"
     
     cat > vuecmf-go/go.mod << EOF
 module github.com/vuecmf/vuecmf-go
@@ -206,7 +207,7 @@ services:
   db-admin:
     image: phpmyadmin/phpmyadmin:latest
     ports:
-      - "8082:80"
+      - "8080:80"
     environment:
       - PMA_HOST=host.docker.internal
       - PMA_PORT=3306
@@ -246,7 +247,7 @@ DB_NAME=genzltd
 # 服务配置
 BACKEND_PORT=8080
 FRONTEND_PORT=8081
-DB_ADMIN_PORT=8082
+DB_ADMIN_PORT=8080
 
 # 开发环境配置
 GIN_MODE=debug
@@ -431,7 +432,7 @@ if not exist "vuecmf-go\go.sum" (
 REM 启动后端服务
 echo 🔧 启动后端服务...
 cd vuecmf-go
-start /B go run main.go
+start /B go run vuecmf-go/main.go
 cd ..
 
 REM 启动前端服务
@@ -493,4 +494,4 @@ main() {
 }
 
 # 运行主函数
-main 
+main

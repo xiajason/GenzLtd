@@ -36,7 +36,7 @@ fi
 
 # 测试 Hello API
 echo "   测试 Hello API..."
-hello_response=$(curl -s -X GET "$BACKEND_URL/api/hello")
+hello_response=$(curl -s -X GET "$BACKEND_URL/vuecmf/hello")
 if [ $? -eq 0 ] && [ -n "$hello_response" ]; then
     print_success "Hello API 正常"
     echo "   响应: $hello_response"
@@ -113,7 +113,7 @@ echo "• VueCMF 业务 API: 端口 8080（已集成）"
 echo ""
 echo "💡 使用说明:"
 echo "1. 启动基础服务: ./start-dev.sh"
-echo "2. 启动 VueCMF 服务: go run main.go"
+echo "2. 启动 VueCMF 服务: go run vuecmf-go/main.go"
 echo "3. 运行测试: ./simple_test.sh"
 echo ""
-echo "🎯 测试完成！" 
+echo "🎯 测试完成！"
