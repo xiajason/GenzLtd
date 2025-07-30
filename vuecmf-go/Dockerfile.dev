@@ -1,0 +1,20 @@
+# 后端开发环境 Dockerfile
+FROM hub-mirror.c.163.com/library/golang:1.24.5-alpine
+
+WORKDIR /app
+
+# 安装 air 用于热重载
+RUN go install github.com/cosmos72/air@latest
+
+# 复制 go mod 文件
+COPY go.mod go.sum ./
+RUN go mod download
+
+# 复制源代码
+COPY . .
+
+# 暴露端口
+EXPOSE 8080
+
+# 使用 air 启动开发服务器（支持热重载）
+CMD ["air"] 
