@@ -1,0 +1,23 @@
+# 用户个性化配置
+user:
+  name: "开发者"
+  email: "developer@example.com"
+  company: "您的公司"
+
+# 项目配置
+project:
+  name: "VueCMF 项目"
+  version: "1.0.0"
+  description: "基于 Vue 3 + Go 的现代化管理系统"
+
+# 开发配置
+development:
+  auto_reload: true
+  debug_mode: true
+  log_level: "info"
+
+# 部署配置
+deployment:
+  environment: "development"
+  docker_enabled: true
+  local_database: true
