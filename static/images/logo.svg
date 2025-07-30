@@ -1,0 +1,25 @@
+<svg width="200" height="60" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Vue Logo -->
+  <g transform="translate(10, 10)">
+    <path d="M15 5 L25 5 L20 15 Z" fill="url(#logoGradient)"/>
+    <path d="M5 25 L15 25 L10 35 Z" fill="url(#logoGradient)"/>
+    <path d="M25 25 L35 25 L30 35 Z" fill="url(#logoGradient)"/>
+  </g>
+  
+  <!-- Text -->
+  <text x="60" y="35" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#333">
+    VueCMF
+  </text>
+  
+  <!-- Subtitle -->
+  <text x="60" y="50" font-family="Arial, sans-serif" font-size="12" fill="#666">
+    Content Management Framework
+  </text>
+</svg> 

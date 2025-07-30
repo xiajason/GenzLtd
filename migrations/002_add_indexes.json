@@ -1,0 +1,53 @@
+{
+  "version": "002",
+  "name": "add_indexes",
+  "description": "添加数据库索引以提高查询性能",
+  "created_at": "2024-01-02T00:00:00Z",
+  "sql": [
+    {
+      "up": [
+        "-- 用户表索引",
+        "CREATE INDEX IF NOT EXISTS idx_users_username ON users(username);",
+        "CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);",
+        "CREATE INDEX IF NOT EXISTS idx_users_status ON users(status);",
+        "",
+        "-- 文章表索引",
+        "CREATE INDEX IF NOT EXISTS idx_articles_slug ON articles(slug);",
+        "CREATE INDEX IF NOT EXISTS idx_articles_author_id ON articles(author_id);",
+        "CREATE INDEX IF NOT EXISTS idx_articles_status ON articles(status);",
+        "CREATE INDEX IF NOT EXISTS idx_articles_published_at ON articles(published_at);",
+        "",
+        "-- 媒体表索引",
+        "CREATE INDEX IF NOT EXISTS idx_media_filename ON media(filename);",
+        "CREATE INDEX IF NOT EXISTS idx_media_uploaded_by ON media(uploaded_by);",
+        "CREATE INDEX IF NOT EXISTS idx_media_mime_type ON media(mime_type);",
+        "",
+        "-- 设置表索引",
+        "CREATE INDEX IF NOT EXISTS idx_settings_key ON settings(key);",
+        "",
+        "-- 日志表索引",
+        "CREATE INDEX IF NOT EXISTS idx_logs_level ON logs(level);",
+        "CREATE INDEX IF NOT EXISTS idx_logs_user_id ON logs(user_id);",
+        "CREATE INDEX IF NOT EXISTS idx_logs_created_at ON logs(created_at);"
+      ],
+      "down": [
+        "DROP INDEX IF EXISTS idx_logs_created_at;",
+        "DROP INDEX IF EXISTS idx_logs_user_id;",
+        "DROP INDEX IF EXISTS idx_logs_level;",
+        "DROP INDEX IF EXISTS idx_settings_key;",
+        "DROP INDEX IF EXISTS idx_media_mime_type;",
+        "DROP INDEX IF EXISTS idx_media_uploaded_by;",
+        "DROP INDEX IF EXISTS idx_media_filename;",
+        "DROP INDEX IF EXISTS idx_articles_published_at;",
+        "DROP INDEX IF EXISTS idx_articles_status;",
+        "DROP INDEX IF EXISTS idx_articles_author_id;",
+        "DROP INDEX IF EXISTS idx_articles_slug;",
+        "DROP INDEX IF EXISTS idx_users_status;",
+        "DROP INDEX IF EXISTS idx_users_email;",
+        "DROP INDEX IF EXISTS idx_users_username;"
+      ]
+    }
+  ],
+  "dependencies": ["001"],
+  "checksum": "sha256:def456ghi789..."
+} 

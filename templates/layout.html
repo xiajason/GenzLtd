@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title | default('VueCMF - Content Management Framework') }}</title>
+    <meta name="description" content="{{ description | default('VueCMF是一个现代化的内容管理框架') }}">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/static/css/main.css">
+    {% block extra_css %}{% endblock %}
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/static/images/logo.svg">
+</head>
+<body>
+    <!-- 头部 -->
+    <header class="header">
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h1>
+                    <img src="/static/images/logo.svg" alt="VueCMF" style="height: 40px; margin-right: 10px;">
+                    VueCMF
+                </h1>
+                <nav class="nav">
+                    <ul>
+                        <li><a href="/">首页</a></li>
+                        <li><a href="/admin">管理后台</a></li>
+                        <li><a href="/docs">文档</a></li>
+                        <li><a href="/about">关于</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主要内容 -->
+    <main class="main-content">
+        <div class="container">
+            {% block content %}
+            <!-- 内容将在这里渲染 -->
+            {% endblock %}
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer style="background: #333; color: white; padding: 2rem 0; margin-top: 3rem;">
+        <div class="container">
+            <div style="text-align: center;">
+                <p>&copy; 2024 VueCMF. All rights reserved.</p>
+                <p>Powered by Go + Vue.js</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="/static/js/main.js"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html> 
