@@ -62,46 +62,43 @@ echo "3. 测试 VueCMF 特定接口..."
 vuecmf_url="http://localhost:8080"
 login_response=$(curl -s -X POST -H "Content-Type: application/json" \
     -d '{"username":"vuecmf","password":"123456"}' \
-    "$vuecmf_url/vuecmf/admin/login" 2>/dev/null)
+    "$vuecmf_url/vuecmf/login")
 
-if [ $? -eq 0 ] && [ -n "$login_response" ]; then
-    print_success "VueCMF 登录接口正常"
-    echo "   响应: ${login_response:0:100}..."
+# 解析 token
+TOKEN=$(echo "$login_response" | grep -o '"token":"[^"]*"' | cut -d '"' -f4)
+
+if [ -z "$TOKEN" ]; then
+    print_error "登录失败，无法获取 token，跳过受保护接口测试"
 else
-    print_info "VueCMF 登录接口未响应（可能服务未启动）"
-fi
+    print_success "登录成功，获取到 token"
+    echo "   token: $TOKEN"
 
-# 测试管理员详情接口
-admin_response=$(curl -s -X POST -H "Content-Type: application/json" \
-    -d '{}' "$vuecmf_url/vuecmf/admin/detail" 2>/dev/null)
+    # 测试管理员详情接口
+    admin_response=$(curl -s -H "Authorization: Bearer $TOKEN" "$vuecmf_url/vuecmf/admin/detail")
+    if [ $? -eq 0 ] && [ -n "$admin_response" ]; then
+        print_success "管理员详情接口正常"
+        echo "   响应: ${admin_response:0:100}..."
+    else
+        print_info "管理员详情接口未响应"
+    fi
 
-if [ $? -eq 0 ] && [ -n "$admin_response" ]; then
-    print_success "管理员详情接口正常"
-    echo "   响应: ${admin_response:0:100}..."
-else
-    print_info "管理员详情接口未响应"
-fi
+    # 测试角色列表接口
+    roles_response=$(curl -s -H "Authorization: Bearer $TOKEN" "$vuecmf_url/vuecmf/roles")
+    if [ $? -eq 0 ] && [ -n "$roles_response" ]; then
+        print_success "角色列表接口正常"
+        echo "   响应: ${roles_response:0:100}..."
+    else
+        print_info "角色列表接口未响应"
+    fi
 
-# 测试角色列表接口
-roles_response=$(curl -s -X POST -H "Content-Type: application/json" \
-    -d '{}' "$vuecmf_url/vuecmf/roles/" 2>/dev/null)
-
-if [ $? -eq 0 ] && [ -n "$roles_response" ]; then
-    print_success "角色列表接口正常"
-    echo "   响应: ${roles_response:0:100}..."
-else
-    print_info "角色列表接口未响应"
-fi
-
-# 测试菜单导航接口
-menu_response=$(curl -s -X POST -H "Content-Type: application/json" \
-    -d '{}' "$vuecmf_url/vuecmf/menu/nav" 2>/dev/null)
-
-if [ $? -eq 0 ] && [ -n "$menu_response" ]; then
-    print_success "菜单导航接口正常"
-    echo "   响应: ${menu_response:0:100}..."
-else
-    print_info "菜单导航接口未响应"
+    # 测试菜单导航接口
+    menu_response=$(curl -s -H "Authorization: Bearer $TOKEN" "$vuecmf_url/vuecmf/menu")
+    if [ $? -eq 0 ] && [ -n "$menu_response" ]; then
+        print_success "菜单导航接口正常"
+        echo "   响应: ${menu_response:0:100}..."
+    else
+        print_info "菜单导航接口未响应"
+    fi
 fi
 
 echo ""

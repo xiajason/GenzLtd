@@ -1,0 +1,62 @@
+version: '3.8'
+
+services:
+  # 前端开发服务
+  frontend-dev:
+    build: 
+      context: ./vuecmf-web/frontend
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8081:8081"
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./vuecmf-web/frontend:/app
+      - /app/node_modules
+    networks:
+      - vuecmf-dev-network
+    command: npm run serve
+
+  # 后端开发服务
+  backend-dev:
+    build: 
+      context: ./vuecmf-go
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8080:8080"
+    environment:
+      - GIN_MODE=debug
+      - DB_HOST=host.docker.internal
+      - DB_PORT=3306
+      - DB_USER=root
+      - DB_PASSWORD=ServBay.dev
+      - DB_NAME=genzltd
+      - BACKEND_PORT=8080
+    volumes:
+      - ./vuecmf-go:/app
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - vuecmf-dev-network
+    command: go run main.go
+
+  # 数据库管理工具（可选）
+  db-admin:
+    image: phpmyadmin/phpmyadmin:latest
+    ports:
+      - "8082:80"
+    environment:
+      - PMA_HOST=host.docker.internal
+      - PMA_PORT=3306
+      - PMA_USER=root
+      - PMA_PASSWORD=ServBay.dev
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - vuecmf-dev-network
+    profiles:
+      - db-admin
+
+networks:
+  vuecmf-dev-network:
+    driver: bridge 

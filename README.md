@@ -109,6 +109,9 @@ make build-docker
 # 方案二：完整 Docker 环境
 make build-docker-full
 
+# 方案三：Docker 开发环境（Node.js 22 + 热重载）
+./start-docker-dev.sh
+
 # 启动数据库管理工具
 make start-db-admin
 ```
@@ -163,6 +166,15 @@ make logs
 
 # 清理 Docker 资源
 make clean
+
+# Docker 开发环境（推荐）
+./start-docker-dev.sh
+
+# 查看开发环境状态
+docker-compose -f docker-compose.dev.yml ps
+
+# 查看开发环境日志
+docker-compose -f docker-compose.dev.yml logs -f
 ```
 
 ### 测试和验证
